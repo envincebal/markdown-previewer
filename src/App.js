@@ -5,8 +5,16 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      text : "## This is a sub-heading...\n\n### And here's some other cool stuff:\n\nHeres some code, `<div></div>`, between 2 backticks.\n\n```// this is multi-line code:function anotherExample(firstLine, lastLine) {if (firstLine == '```' && lastLine == '```') {return multiLineCode; }}```\n\nYou can also make text **bold**... whoa!\nOr _italic_.\nOr... wait for it... **_both!_**\nAnd feel free to go crazy ~~crossing stuff out~~.\n\nThere's also [links](https://www.freecodecamp.com), and\n> Block Quotes!\n\nAnd if you want to get really crazy, even tables:\n\nWild Header | Crazy Header | Another Header?\n------------ | ------------- | ------------- \nYour content can | be here, and it | can be here....\nAnd here.| Okay. | I think we get it.\n\n- And of course there are lists.\n- Some are bulleted.\n- With different indentation levels. \n- That look like this.\n\n1. And there are numbererd lists too.\n1. Use just 1s if you want!\n1. But the list goes on...\n- Even if you use dashes or asterisks.\n* And last but not least, let's not forget embedded images:\n\n![React Logo w/ Text](https://goo.gl/Umyytc)"
+      text : "## This is a sub-heading...\n\n### And here's some other cool stuff:\n\nHeres some code, `<div></div>`, between 2 backticks.\n\n Shopping list:  \n* apples\n* oranges\n* pears \n\nNumbered list:\n 1. apples\n 2. oranges\n 3. pears\n\nYou can also make text **bold**... whoa!\nOr _italic_.\nOr... wait for it... **_both!_**\nAnd feel free to go crazy ~~crossing stuff out~~.\n\nThere's also [links](https://www.freecodecamp.com), and\n> Block Quotes!\n\nAnd last but not least, let's not forget embedded images:\n\n![React Logo w/ Text](https://goo.gl/Umyytc)"
     }
+    this.updateMarkdown = this.updateMarkdown.bind(this);
+    this.clearText = this.clearText.bind(this);
+  }
+  
+  clearText(){
+    this.setState({
+      text: ""
+    });
   }
   
   getMarkdown(value){
@@ -26,13 +34,22 @@ class App extends Component {
         <Header />           
         <div className="container row">
           <div className="col-md-6 text-div">
-            <textarea id="editor" defaultValue={this.state.text}>
-              
-            </textarea>
+            <div className="section-container">
+              <div className="subtitle-container">
+                <span className="subtitle">Editor</span>
+                <span className="clear" onClick={this.clearText}>Clear Text</span>
+              </div>
+              <textarea id="editor" value={this.state.text} onChange={this.updateMarkdown}>
+              </textarea>
+            </div>
           </div>
           <div id="preview" className="col-md-6">
-            <div className="content">
-            
+            <div className="section-container">
+              <div className="subtitle-container">
+                <span className="subtitle">Preview</span>
+              </div>
+              <div className="content" dangerouslySetInnerHTML={this.getMarkdown(this.state.text)}>
+              </div>
             </div>
           </div>
         </div>
