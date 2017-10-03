@@ -53,7 +53,6 @@ class App extends Component {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -63,14 +62,6 @@ const Header = (props) => {
   return (
     <div className="header-div text-center">
       <h1>Github Markdown Previewer</h1>
-    </div>
-  );
-}
-
-const Footer = (props) => {
-  return (
-    <div className="footer-div text-center">
-      <h3>By Vincent Yan</h3>
     </div>
   );
 }
